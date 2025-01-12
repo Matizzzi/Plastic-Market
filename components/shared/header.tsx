@@ -1,60 +1,25 @@
-import { FiSearch, FiShoppingCart } from "react-icons/fi";
-import Image from "next/image";
+import React from "react";
+import Logo from "./logo";
+import Perfil from "./perfil";
 
-const Header = () => {
+
+const Header: React.FC = () => {
   return (
-    <header className="flex items-center justify-between px-6 py-4 bg-white shadow-md">
-      {/* Logo */}
-      <div className="flex items-center space-x-2">
-        <Image
-          src="/IMG/LOGO.jpg" // Ruta de la imagen en el directorio 'public'
-          alt="Plastic Market Logo"
-          width={32}
-          height={32}
-          priority
-        />
-        <span className="font-bold text-xl text-green-600">Plastic Market</span>
-      </div>
+    <header className="fixed left-0 top-0 w-full bg-gradient-to-r from-green-400 to-blue-500 shadow-md py-4 px-6 z-50">
+      <div className="container mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <Logo />
 
-      {/* Menú de navegación */}
-      <nav className="hidden md:flex space-x-6">
-        <a href="#" className="text-gray-700 hover:text-green-600">
-          Home
-        </a>
-        <a href="#" className="text-gray-700 hover:text-green-600">
-          Plastico
-        </a>
-        <a href="#" className="text-gray-700 hover:text-green-600">
-          Vidrio
-        </a>
-        <a href="#" className="text-gray-700 hover:text-green-600">
-          Papel
-        </a>
-      </nav>
-
-      {/* Búsqueda y opciones */}
-      <div className="flex items-center space-x-4">
-        {/* Barra de búsqueda */}
-        <div className="hidden md:flex items-center border rounded-lg overflow-hidden">
-          <input
-            type="text"
-            placeholder="Buscar..."
-            className="px-4 py-2 text-gray-600 focus:outline-none"
-          />
-          <button className="bg-green-600 text-white px-4 py-2">
-            Buscar
-          </button>
+        {/* Navigation */}
+        <div className="hidden md:flex space-x-8">
+          <section className="cursor-pointer text-white hover:text-yellow-400 transition-all duration-300 hover:scale-105">Home</section>
+          <section className="cursor-pointer text-white hover:text-yellow-400 transition-all duration-300 hover:scale-105">Plástico</section>
+          <section className="cursor-pointer text-white hover:text-yellow-400 transition-all duration-300 hover:scale-105">Vidrio</section>
+          <section className="cursor-pointer text-white hover:text-yellow-400 transition-all duration-300 hover:scale-105">Papel</section>
         </div>
 
-        {/* Íconos (Búsqueda, Carrito) */}
-        <div className="flex space-x-4">
-          <button className="text-gray-700 hover:text-green-600">
-            <FiSearch size={24} />
-          </button>
-          <button className="text-gray-700 hover:text-green-600">
-            <FiShoppingCart size={24} />
-          </button>
-        </div>
+        {/* Perfil y carrito */}
+        <Perfil />
       </div>
     </header>
   );
