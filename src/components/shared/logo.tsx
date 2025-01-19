@@ -1,14 +1,12 @@
-import Image from "next/image";
-
+/* eslint-disable @next/next/no-img-element */
 const Logo = () => {
   return (
     <div className="w-10 h-10">
-      <Image 
-        src="/images/fondo.png" // Ruta relativa desde 'public'
+      <img 
+        src="/img/fondoo.png"  // Asegúrate de que la ruta esté correcta
         alt="Logo"
         width={40}
         height={40}
-        priority
         className="object-contain"
       />
     </div>
