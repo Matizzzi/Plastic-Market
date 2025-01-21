@@ -1,4 +1,5 @@
-"use client"; // Marca este archivo como un componente del cliente
+// Agregar la directiva 'use client' al principio del archivo para que se ejecute correctamente en el cliente
+"use client";
 
 import { useEffect } from "react";
 import "animate.css";
@@ -55,44 +56,43 @@ const Cuerpo = () => {
         </p>
       </div>
 
-      <style>
-        {`
-          @keyframes rotate {
-            0% {
-              transform: rotate(0deg);
-            }
-            100% {
-              transform: rotate(360deg);
-            }
+      {/* Aquí van los estilos en línea, dentro de la etiqueta <style> correctamente formateada */}
+      <style jsx>{`
+        @keyframes rotate {
+          0% {
+            transform: rotate(0deg);
           }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
 
-          @keyframes rotate-reverse {
-            0% {
-              transform: rotate(360deg);
-            }
-            100% {
-              transform: rotate(0deg);
-            }
+        @keyframes rotate-reverse {
+          0% {
+            transform: rotate(360deg);
           }
+          100% {
+            transform: rotate(0deg);
+          }
+        }
 
-          .animate-rotate {
-            animation: rotate 20s linear infinite;
-          }
+        .animate-rotate {
+          animation: rotate 20s linear infinite;
+        }
 
-          .animate-rotate-reverse {
-            animation: rotate-reverse 30s linear infinite;
-          }
+        .animate-rotate-reverse {
+          animation: rotate-reverse 30s linear infinite;
+        }
 
-          @media (max-width: 768px) {
-            .title {
-              font-size: 2.5rem !important;
-            }
-            .subtitle {
-              font-size: 1rem !important;
-            }
+        @media (max-width: 768px) {
+          .title {
+            font-size: 2.5rem !important;
           }
-        `}
-      </style>
+          .subtitle {
+            font-size: 1rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

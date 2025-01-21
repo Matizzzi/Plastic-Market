@@ -13,45 +13,57 @@ const ReciclamosSection = () => {
   ];
 
   const handleMoreInfo = () => {
-    alert("Mostrando más información...");
+    alert("Explorando más información sobre nuestros materiales reciclados...");
   };
 
   return (
-    <section className="bg-gray-100 py-10">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-700 font-serif">
+    <section className="bg-gray-50 py-12">
+      <div className="text-center mb-10">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-800 font-serif">
           ¿QUÉ RECICLAMOS?
         </h2>
-        <hr className="w-16 mx-auto border-t-2 border-green-500 mt-2" />
+        <hr className="w-16 mx-auto border-t-4 border-green-500 mt-3" />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-4 px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 px-6 md:px-10">
         {items.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col items-center text-center space-y-4 p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer"
+            role="button"
+            tabIndex={0}
+            className="flex flex-col items-center text-center space-y-4 p-6 bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() => console.log(`Seleccionado: ${item.label}`)}
-            aria-label={`Ver más sobre ${item.label}`}
+            onKeyPress={(e) => e.key === "Enter" && console.log(`Seleccionado: ${item.label}`)}
+            aria-label={`Ver más información sobre ${item.label}`}
           >
-            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-300 hover:scale-110 transition-transform duration-300 ease-in-out shadow-sm">
+            <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-green-300 shadow-md hover:scale-110 transition-transform duration-300">
               <img
                 src={item.img}
-                alt={`Imagen de reciclaje de ${item.label}`}
-                className="w-full h-full object-cover shadow-lg"
+                alt={`Material reciclable: ${item.label}`}
+                className="w-full h-full object-cover"
                 loading="lazy"
               />
             </div>
-            <p className="text-base font-medium text-gray-800">{item.label}</p>
+            <p className="text-lg font-semibold text-gray-700">{item.label}</p>
           </div>
         ))}
       </div>
-      <div className="mt-8 flex justify-center">
+      <div className="mt-10 flex justify-center">
         <button
           onClick={handleMoreInfo}
-          className="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-600 hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2"
-          aria-label="Obtener más información sobre lo que reciclamos"
+          className="flex items-center bg-green-500 text-white font-medium text-lg px-8 py-4 rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transform transition-all duration-300 space-x-2"
+          aria-label="Obtener más información sobre los materiales reciclables"
         >
           <span>Más Información</span>
-          <i className="fa fa-arrow-right"></i>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="w-5 h-5"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5l6 6m0 0l-6 6m6-6H3" />
+          </svg>
         </button>
       </div>
     </section>

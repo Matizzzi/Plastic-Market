@@ -3,7 +3,7 @@ const Logo = () => {
   return (
     <div className="w-10 h-10">
       <img 
-        src="/img/fondoo.png"  // Asegúrate de que la ruta esté correcta
+        src="/img/sinborde.png"  // Asegúrate de que la ruta esté correcta
         alt="Logo"
         width={40}
         height={40}
