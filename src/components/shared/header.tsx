@@ -61,7 +61,7 @@ const Header: React.FC = () => {
             { href: "/somos", label: "Quiénes somos" },
             { href: "/servicios", label: "Servicios" },
             { href: "/productos", label: "Productos" },
-            { href: "/red-reciclaje", label: "Impacto" },
+            { href: "/Impacto", label: "Impacto" },
             { href: "/contacto", label: "Contáctanos" },
           ].map((item) => (
             <Link
@@ -115,7 +115,7 @@ const Header: React.FC = () => {
             { href: "/somos", label: "Quiénes somos" },
             { href: "/servicios", label: "Servicios" },
             { href: "/productos", label: "Productos" },
-            { href: "/red-reciclaje", label: "Impacto" },
+            { href: "/Impacto", label: "Impacto" },
             { href: "/contacto", label: "Contáctanos" },
           ].map((item) => (
             <Link
