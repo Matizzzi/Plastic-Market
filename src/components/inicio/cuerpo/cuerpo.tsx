@@ -52,7 +52,7 @@ const Cuerpo = () => {
             lineHeight: "1.8",
           }}
         >
-          &ldquo;Ideas que Venden Mas&rdquo;
+          &ldquo;IDEAS QUE VENDEN MAS&rdquo;
         </p>
       </div>
 
