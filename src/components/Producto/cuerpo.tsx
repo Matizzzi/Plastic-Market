@@ -27,7 +27,11 @@ const CuerpoProductos = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {[ 
-            { title: "Producto 1", description: "Descripción breve del producto 1.", image: "/img/gato.jpg" },
+            { 
+              title: "Producto 1", 
+              description: "Descripción breve del producto 1.", 
+              image: "/img/tablas.png" 
+            },
             { title: "Producto 2", description: "Descripción breve del producto 2.", image: "/img/gato.jpg" },
             { title: "Producto 3", description: "Descripción breve del producto 3.", image: "/img/gato.jpg" },
             { title: "Producto 4", description: "Descripción breve del producto 4.", image: "/img/gato.jpg" },

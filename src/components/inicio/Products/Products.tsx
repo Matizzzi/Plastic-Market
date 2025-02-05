@@ -15,7 +15,7 @@ const productos: Producto[] = [
     id: 1,
     nombre: "Producto Destacado 1",
     descripcion: "Una breve descripción del producto aquí.",
-    imagen: "/img/tabla.png", // Ruta relativa desde public
+    imagen: "/img/tablas.png", // Ruta limpia y accesible desde public
     enlace: "#",
   },
   {
