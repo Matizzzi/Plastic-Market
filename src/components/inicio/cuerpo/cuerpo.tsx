@@ -43,7 +43,7 @@ const Cuerpo = () => {
             textShadow: "2px 2px 8px rgba(0, 0, 0, 0.8)",
           }}
         >
-          PlasticMarket
+          PlasticMarket<sup>®</sup>
         </h1>
         <p
           className="subtitle text-lg sm:text-xl md:text-2xl font-light mb-8 animate__animated"

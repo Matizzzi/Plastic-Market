@@ -22,7 +22,7 @@ const Footer = () => {
                 </div>
               </Link>
               <span className="text-3xl font-bold hidden md:inline-block text-white tracking-tight">
-                PlasticMarket
+                PlasticMarket<sup>®</sup>
               </span>
             </div>
 
@@ -34,24 +34,20 @@ const Footer = () => {
             {/* Social Media Icons */}
             <div className="flex gap-6">
               {[
-                { href: "#", label: "Instagram", icon: "M12 2.163..." },
-                { href: "#", label: "Facebook", icon: "M24 12.073..." },
-                { href: "#", label: "LinkedIn", icon: "M20.447 20.452..." },
-                { href: "#", label: "YouTube", icon: "M23.498 6.186..." },
+                { href: "#", label: "Instagram", icon: "/icons/instagram.svg" },
+                { href: "#", label: "Facebook", icon: "/icons/facebook.svg" },
+                { href: "#", label: "LinkedIn", icon: "/icons/linkedin.svg" },
+                { href: "https://www.youtube.com/@plasticmarketspa574", label: "YouTube", icon: "img/yt.png" },
               ].map((media, index) => (
                 <a
                   key={index}
                   href={media.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white hover:text-teal-200 transition-colors duration-300 transform hover:scale-110"
                   aria-label={`Visítanos en ${media.label}`}
                 >
-                  <svg
-                    className="w-8 h-8"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d={media.icon}></path>
-                  </svg>
+                  <img src={media.icon} alt={media.label} className="w-8 h-8" />
                 </a>
               ))}
             </div>
