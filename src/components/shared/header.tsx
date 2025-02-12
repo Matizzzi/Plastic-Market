@@ -51,7 +51,7 @@ const Header: React.FC = () => {
               isScrolled ? "text-gray-900" : "text-white"
             } tracking-tight transition-colors`}
           >
-            Market<sup>®</sup>
+            PlasticMarket<sup>®</sup>
           </span>
         </div>
 

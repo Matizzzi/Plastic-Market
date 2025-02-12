@@ -15,7 +15,7 @@ const Footer = () => {
                 <div className="w-16 h-16 relative cursor-pointer">
                   {/* Logo Image */}
                   <img
-                    src="/img/sinletra.png" // Reemplaza esta ruta con la ubicación de tu imagen
+                    src="/img/nuevo.png" // Reemplaza esta ruta con la ubicación de tu imagen
                     alt="PlasticMarket Logo"
                     className="w-full h-full object-cover rounded-full"
                   />
@@ -34,10 +34,10 @@ const Footer = () => {
             {/* Social Media Icons */}
             <div className="flex gap-6">
               {[
-                { href: "#", label: "Instagram", icon: "/icons/instagram.svg" },
-                { href: "#", label: "Facebook", icon: "/icons/facebook.svg" },
-                { href: "#", label: "LinkedIn", icon: "/icons/linkedin.svg" },
-                { href: "https://www.youtube.com/@plasticmarketspa574", label: "YouTube", icon: "img/yt.png" },
+                { href: "#", label: "Instagram", icon: "img/instagram.png" },
+                { href: "#", label: "Facebook", icon: "img/facebook.png" },
+                { href: "#", label: "LinkedIn", icon: "img/xn.png" },
+                { href: "https://www.youtube.com/@plasticmarketspa574", label: "YouTube", icon: "img/ytnsf.png" },
               ].map((media, index) => (
                 <a
                   key={index}
@@ -79,7 +79,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-12 text-center border-t border-teal-400 pt-6 text-sm">
           <p>
-            © {new Date().getFullYear()} PlasticMarket. Todos los derechos
+            © {new Date().getFullYear()} PlasticMarket<sup>®</sup>. Todos los derechos
             reservados.
           </p>
         </div>
