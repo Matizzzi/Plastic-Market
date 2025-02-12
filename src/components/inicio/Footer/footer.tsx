@@ -12,14 +12,14 @@ const Footer = () => {
             {/* Logo */}
             <div className="flex items-center gap-6">
               <Link href="/" aria-label="PlasticMarket - Inicio">
-                <div className="w-16 h-16 relative cursor-pointer">
-                  {/* Logo Image */}
-                  <img
-                    src="/img/nuevo.png" // Reemplaza esta ruta con la ubicación de tu imagen
-                    alt="PlasticMarket Logo"
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                </div>
+              <div className="w-32 h-32 relative cursor-pointer">
+                {/* Logo Image */}
+                <img
+                  src="/img/image.png" // Reemplaza esta ruta con la ubicación de tu imagen
+                  alt="PlasticMarket Logo"
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </div>
               </Link>
               <span className="text-3xl font-bold hidden md:inline-block text-white tracking-tight">
                 PlasticMarket<sup>®</sup>
