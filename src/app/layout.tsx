@@ -4,7 +4,11 @@ import "../styles/globals.css";
 
 
 import { ReactNode } from "react";
-import Header from "@/src/components/shared/header";
+import Header from "@/components/shared/header";
+ // Usando una ruta relativa
+
+// Usando una ruta relativa
+
 
 
 

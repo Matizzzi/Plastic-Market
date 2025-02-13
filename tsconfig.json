@@ -18,8 +18,10 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",  // Define el directorio base (la raíz del proyecto)
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["src/*"],  // Agregar el alias para 'src'
+      "@modal/*": ["modal/*"]  // Mantener el alias existente
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

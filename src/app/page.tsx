@@ -6,6 +6,7 @@ import Products from "../components/inicio/Products/Products";
 import Footer from "../components/inicio/Footer/footer";
 
 
+
 const Page: React.FC = () => {
   return (
     <div>
@@ -15,6 +16,7 @@ const Page: React.FC = () => {
      <Secction />
     < Products />
     <Footer />
+  
     </div>
   );
 };
