@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import { db } from "@modal/firebase"; // Verifica la ruta
 import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 
-// Define la estructura del Producto con un array para las imágenes
+// Define la estructura del Producto con dos imágenes
 interface Product {
   id: string;
   title: string;
   description: string;
-  images: string[]; // Aseguramos que 'images' sea un array de strings
+  images: string[]; // Dos imágenes en un array
   category: string;
 }
 
@@ -18,7 +18,7 @@ const CreateProduct = () => {
   const [product, setProduct] = useState({
     title: "",
     description: "",
-    images: ["", "", ""], // Inicializamos 'images' como un array vacío
+    images: ["", ""], // Inicializamos 'images' como un array con dos elementos
     category: "Hogar",
   });
 
@@ -32,7 +32,7 @@ const CreateProduct = () => {
     e.preventDefault();
     try {
       await addDoc(collection(db, "products"), product);
-      setProduct({ title: "", description: "", images: ["", "", ""], category: "Hogar" }); // Resetear el producto
+      setProduct({ title: "", description: "", images: ["", ""], category: "Hogar" }); // Resetear el producto
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
       fetchProducts(); // Actualizar la lista después de agregar el producto
@@ -49,7 +49,7 @@ const CreateProduct = () => {
       const querySnapshot = await getDocs(collection(db, "products"));
       const productsList = querySnapshot.docs.map((doc) => ({
         id: doc.id,
-        images: doc.data().images || [],  // Asegúrate de que 'images' sea siempre un array
+        images: doc.data().images || ["", ""], // Asegúrate de que 'images' sea siempre un array con dos elementos
         ...doc.data(),
       })) as Product[];
       setProducts(productsList);
@@ -92,7 +92,7 @@ const CreateProduct = () => {
         setSuccess(true);
         setTimeout(() => setSuccess(false), 3000);
         setEditingProductId(null); // Limpiamos el estado de edición
-        setProduct({ title: "", description: "", images: ["", "", ""], category: "Hogar" });
+        setProduct({ title: "", description: "", images: ["", ""], category: "Hogar" });
         fetchProducts(); // Actualizamos la lista de productos después de la edición
       } catch (error) {
         console.error("Error al actualizar el producto:", error);
@@ -127,7 +127,7 @@ const CreateProduct = () => {
           className="w-full p-2 border rounded"
           required
         />
-        {/* Campos para imágenes */}
+        {/* Campos para las dos imágenes */}
         {product.images.map((image, index) => (
           <input
             key={index}
@@ -166,9 +166,9 @@ const CreateProduct = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {products.map((product) => (
               <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
-                {/* Mostrar las imágenes del producto */}
-                {product.images && Array.isArray(product.images) && product.images.length > 0 ? (
-                  product.images.map((image, index) => (
+                {/* Mostrar las dos imágenes del producto */}
+                {product.images && product.images.length > 0 ? (
+                  product.images.filter(image => image).map((image, index) => (
                     <img
                       key={index}
                       src={image}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { db } from "@modal/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -9,18 +10,27 @@ interface Producto {
   id: string;
   nombre: string;
   descripcion: string;
-  imagen: string;
+  imagen: string; // Corregido de 'images' a 'imagen'
 }
 
+// Componente de tarjeta de producto
 const ProductoCard: React.FC<Producto> = ({ nombre, descripcion, imagen }) => (
   <div className="producto-item bg-white rounded-lg shadow-xl w-80 overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl">
     <div className="relative w-full h-72 overflow-hidden rounded-t-lg">
-      <img
-        src={imagen}
-        alt={nombre}
-        className="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out hover:scale-110"
-        loading="lazy"
-      />
+      {/* Comprobamos si 'imagen' está vacía antes de mostrarla */}
+      {imagen ? (
+        <Image
+          src={imagen} // Usar imagen directamente
+          alt={nombre}
+          layout="fill"
+          objectFit="cover"
+          className="rounded-lg mb-4"
+        />
+      ) : (
+        <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+          No hay imagen disponible
+        </div>
+      )}
       <div className="absolute inset-0 bg-black opacity-30"></div>
     </div>
     <div className="p-6">
@@ -30,6 +40,7 @@ const ProductoCard: React.FC<Producto> = ({ nombre, descripcion, imagen }) => (
   </div>
 );
 
+// Componente principal que lista los productos
 const Productos = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
 
@@ -41,7 +52,7 @@ const Productos = () => {
           id: doc.id,
           nombre: doc.data().title,
           descripcion: doc.data().description,
-          imagen: doc.data().image,
+          imagen: doc.data().image, // Asumimos que la imagen está en 'image'
         })) as Producto[];
         setProductos(productosList);
       } catch (error) {

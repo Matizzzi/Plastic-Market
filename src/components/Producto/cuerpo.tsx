@@ -1,14 +1,17 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { db } from "@modal/firebase"; // Asegúrate de tener la ruta correcta
 import { collection, getDocs } from "firebase/firestore";
-import { FaWhatsapp } from "react-icons/fa"; // Importa el ícono de WhatsApp
+import { FaWhatsapp } from "react-icons/fa"; // Icono de WhatsApp
+import Image from "next/image"; // Para optimizar la carga de imágenes
 
 // Define el tipo para un producto
 interface Product {
   id: string;
   title: string;
   description: string;
-  image: string;
+  images: string[]; // Ahora cada producto tiene un array de imágenes
   category: string; // Agregamos la categoría al tipo Product
 }
 
@@ -44,6 +47,24 @@ const CuerpoProductos = () => {
       const filtered = products.filter((product) => product.category === category);
       setFilteredProducts(filtered);
     }
+  };
+
+  // Lógica para cambiar la imagen mostrada
+  const handleImageChange = (productId: string, direction: string) => {
+    setFilteredProducts((prevProducts) =>
+      prevProducts.map((product) => {
+        if (product.id === productId) {
+          const newIndex =
+            direction === "next"
+              ? (product.images.indexOf(product.images[0]) + 1) % product.images.length
+              : (product.images.indexOf(product.images[0]) - 1 + product.images.length) % product.images.length;
+          const updatedProduct = { ...product, images: product.images };
+          updatedProduct.images[0] = product.images[newIndex];
+          return updatedProduct;
+        }
+        return product;
+      })
+    );
   };
 
   return (
@@ -82,20 +103,6 @@ const CuerpoProductos = () => {
               <option value="Agricultura">Agricultura</option>
               <option value="Maquinaria">Maquinaria</option>
             </select>
-            <div className="absolute right-0 top-0 mt-3 mr-4 text-blue-500 pointer-events-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
           </div>
         </div>
 
@@ -107,14 +114,29 @@ const CuerpoProductos = () => {
                 key={product.id}
                 className="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-64 object-cover rounded-lg mb-4"
-                />
-                <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                  {product.title}
-                </h3>
+                <div className="relative">
+                  <Image
+                    src={product.images[0].trimStart()} // Elimina espacios al principio de la URL
+                    alt={product.title}
+                    width={500}
+                    height={400}
+                    className="w-full h-64 object-cover rounded-lg mb-4"
+                  />
+                  {/* Botones para cambiar la imagen */}
+                  <button
+                    onClick={() => handleImageChange(product.id, "prev")}
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-500 text-white p-2 rounded-full"
+                  >
+                    &#10094;
+                  </button>
+                  <button
+                    onClick={() => handleImageChange(product.id, "next")}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-500 text-white p-2 rounded-full"
+                  >
+                    &#10095;
+                  </button>
+                </div>
+                <h3 className="text-2xl font-semibold text-gray-800 mb-4">{product.title}</h3>
                 <p className="text-gray-600 leading-relaxed mb-4">{product.description}</p>
                 <p className="text-sm text-blue-500 font-medium mt-2">
                   Categoría: {product.category}
@@ -141,7 +163,10 @@ const CuerpoProductos = () => {
           <p className="text-lg leading-relaxed mb-6">
             Obtén más detalles sobre nuestros productos y cómo pueden mejorar tu experiencia.
           </p>
-          <button className="bg-green-500 text-white py-3 px-8 rounded-lg shadow-lg hover:bg-green-600 hover:scale-105 transition-transform duration-300">
+          <button
+            onClick={() => window.open("https://wa.me/56997869032", "_blank")}
+            className="bg-green-500 text-white py-3 px-8 rounded-lg shadow-lg hover:bg-green-600 hover:scale-105 transition-transform duration-300"
+          >
             Contactar
           </button>
         </div>

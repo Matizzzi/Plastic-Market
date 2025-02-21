@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Contacto = () => {
   const [formData, setFormData] = useState({
     nombre: "",
-    correo: "",
+    correo: "claudioperezplasticmarket@gmail.com",
     mensaje: "",
   });
 
@@ -34,11 +34,12 @@ const Contacto = () => {
         <div className="bg-white p-8 rounded-lg shadow-xl animate__animated animate__fadeIn animate__delay-1s">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Información de Contacto</h2>
           
-          <div className="text-lg text-gray-700 mb-4">
-            <p><strong>Correo:</strong> <a href="mailto:info@plasticmarket.com" className="text-blue-500 hover:underline">info@plasticmarket.com</a></p>
-            <p><strong>Teléfono:</strong> <span className="text-gray-900">+1 800-123-4567</span></p>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/18001234567" className="text-green-500 hover:underline">Enviar mensaje</a></p>
-          </div>
+     <div className="text-lg text-gray-700 mb-4">
+  <p><strong>Correo:</strong> <a href="mailto:info@plasticmarket.com" className="text-blue-500 hover:underline">claudioperezplasticmarket@gmail.com</a></p>
+  <p><strong>Teléfono:</strong> <span className="text-gray-900">+56 9 9786 9032</span></p>
+  <p><strong>WhatsApp:</strong> <a href="https://wa.me/56997869032" className="text-green-500 hover:underline">Enviar mensaje</a></p>
+</div>
+
 
           <div className="mt-6">
             <strong>Redes Sociales:</strong>
