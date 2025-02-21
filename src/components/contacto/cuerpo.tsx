@@ -1,36 +1,113 @@
-import React from "react";
-
-const contactosData = [
-  { id: 1, nombre: "Juan Pérez", telefono: "123-456-7890", correo: "juan@email.com" },
-  { id: 2, nombre: "Ana Gómez", telefono: "098-765-4321", correo: "ana@email.com" },
-  { id: 3, nombre: "Carlos López", telefono: "321-654-9870", correo: "carlos@email.com" },
-  { id: 4, nombre: "María Fernández", telefono: "987-654-3210", correo: "maria@email.com" },
-];
+import React, { useState } from "react";
 
 const Contacto = () => {
+  const [formData, setFormData] = useState({
+    nombre: "",
+    correo: "",
+    mensaje: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Aquí agregarías la lógica para enviar el formulario
+    alert("Formulario enviado");
+  };
+
   return (
-    <div className="bg-gray-50 min-h-screen py-12 px-6 md:px-12">
+    <div className="bg-gradient-to-r from-blue-500 to-indigo-500 min-h-screen py-16 px-6 md:px-12">
       {/* Título de la página */}
-      <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-10">
-        Todos los Contactos
+      <h1 className="text-4xl font-extrabold text-center text-white mb-8 animate__animated animate__fadeIn">
+        ¡Contáctanos!
       </h1>
 
-      {/* Lista de contactos */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {contactosData.map((contacto) => (
-          <div key={contacto.id} className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">{contacto.nombre}</h3>
-            <p className="text-gray-600">
-              <strong>Teléfono:</strong> {contacto.telefono}
-            </p>
-            <p className="text-gray-600">
-              <strong>Correo:</strong> <a href={`mailto:${contacto.correo}`} className="text-blue-500">{contacto.correo}</a>
-            </p>
-            <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+      {/* Sección de contacto */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        {/* Información de la empresa */}
+        <div className="bg-white p-8 rounded-lg shadow-xl animate__animated animate__fadeIn animate__delay-1s">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Información de Contacto</h2>
+          
+          <div className="text-lg text-gray-700 mb-4">
+            <p><strong>Correo:</strong> <a href="mailto:info@plasticmarket.com" className="text-blue-500 hover:underline">info@plasticmarket.com</a></p>
+            <p><strong>Teléfono:</strong> <span className="text-gray-900">+1 800-123-4567</span></p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/18001234567" className="text-green-500 hover:underline">Enviar mensaje</a></p>
+          </div>
+
+          <div className="mt-6">
+            <strong>Redes Sociales:</strong>
+            <div className="flex space-x-6 mt-2">
+              <a href="https://facebook.com/plasticmarket" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+                Facebook
+              </a>
+              <a href="https://instagram.com/plasticmarket" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800">
+                Instagram
+              </a>
+              <a href="https://linkedin.com/company/plasticmarket" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900">
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Formulario de contacto */}
+        <div className="bg-white p-8 rounded-lg shadow-xl animate__animated animate__fadeIn animate__delay-2s">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Envíanos un Mensaje</h2>
+          
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="nombre" className="text-gray-700">Nombre</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleInputChange}
+                className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="correo" className="text-gray-700">Correo Electrónico</label>
+              <input
+                type="email"
+                id="correo"
+                name="correo"
+                value={formData.correo}
+                onChange={handleInputChange}
+                className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="mensaje" className="text-gray-700">Mensaje</label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                value={formData.mensaje}
+                onChange={handleInputChange}
+                className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows={4}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white py-3 px-6 rounded-md hover:bg-blue-600 transition-colors duration-300"
+            >
               Enviar Mensaje
             </button>
-          </div>
-        ))}
+          </form>
+        </div>
       </div>
     </div>
   );

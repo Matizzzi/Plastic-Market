@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "@modal/firebase"; // Asegúrate de tener la ruta correcta
 import { collection, getDocs } from "firebase/firestore";
+import { FaWhatsapp } from "react-icons/fa"; // Importa el ícono de WhatsApp
 
 // Define el tipo para un producto
 interface Product {
@@ -145,9 +146,18 @@ const CuerpoProductos = () => {
           </button>
         </div>
       </div>
+
+      {/* Botón flotante de WhatsApp */}
+      <a
+        href="https://wa.me/56997869032"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-8 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transform hover:scale-110 transition-all duration-300"
+      >
+        <FaWhatsapp className="w-8 h-8" />
+      </a>
     </section>
   );
 };
 
 export default CuerpoProductos;
-  

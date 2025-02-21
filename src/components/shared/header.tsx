@@ -1,4 +1,4 @@
-"use client";  // Esta es la directiva que le dice a Next.js que es un componente del cliente
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -14,23 +14,26 @@ const useMenu = () => {
 const Header: React.FC = () => {
   const { isMenuOpen, toggleMenu } = useMenu();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-  // Debounce para optimizar el evento scroll
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    const handleScroll = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => setIsScrolled(window.scrollY > 50), 100);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const sharedClasses = "hover:text-green-600 transform transition duration-300 hover:scale-105";
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(`Correo enviado:\nEmail: ${email}\nMensaje: ${message}`);
+    setEmail("");
+    setMessage("");
+    closeModal();
+  };
 
   return (
     <header
@@ -39,37 +42,21 @@ const Header: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        {/* Logo - Envolver en Link para redirigir a la página principal */}
         <div className="flex items-center space-x-4">
-          <div className="w-[100px] h-[50px]">
-            <Link href="/" aria-label="Ir a la página principal">
+          <div className="w-[80px] sm:w-[100px] h-[40px] sm:h-[50px]">
+            <Link href="/" aria-label="Inicio">
               <Logo />
             </Link>
           </div>
-          <span
-            className={`text-3xl font-extrabold ${
-              isScrolled ? "text-gray-900" : "text-white"
-            } tracking-tight transition-colors`}
-          >
+          <span className={`text-2xl sm:text-4xl font-extrabold ${isScrolled ? "text-gray-900" : "text-white"}`}>
             PlasticMarket<sup>®</sup>
           </span>
         </div>
 
-        {/* Navegación Desktop */}
-        <nav className={`hidden md:flex space-x-8 font-medium ${isScrolled ? "text-gray-900" : "text-white"}`}>
-          {[
-            { href: "/somos", label: "Quiénes somos" },
-            { href: "/servicios", label: "Servicios" },
-            { href: "/productos", label: "Productos" },
-            { href: "/Impacto", label: "Impacto" },
-            { href: "/contacto", label: "Contáctanos" },
-          ].map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`text-sm sm:text-base ${sharedClasses}`}
-              aria-label={item.label}
-            >
+        {/* Menú Desktop */}
+        <nav className={`hidden md:flex space-x-6 text-lg ${isScrolled ? "text-gray-900" : "text-white"}`}>
+          {[{ href: "/somos", label: "Quiénes somos" }, { href: "/productos", label: "Productos" }, { href: "/contacto", label: "Contáctanos" }].map((item) => (
+            <Link key={item.href} href={item.href} className="hover:text-green-600 transition">
               {item.label}
             </Link>
           ))}
@@ -77,59 +64,46 @@ const Header: React.FC = () => {
 
         {/* Botón de Ofertas */}
         <button
-          className={`hidden md:block py-2 px-6 rounded-full shadow-md font-semibold transition-transform duration-300 ${
-            isScrolled
-              ? "bg-gradient-to-r from-green-500 to-green-600 text-white"
-              : "bg-white text-green-600 hover:bg-green-100"
-          }`}
-          aria-label="Recibe ofertas exclusivas"
+          onClick={openModal}
+          className="hidden md:block py-2 px-6 rounded-full bg-green-500 text-white hover:bg-green-600 transition"
         >
           Recibe Ofertas
         </button>
 
-        {/* Menú móvil */}
-        <button
-          onClick={toggleMenu}
-          className={`md:hidden focus:outline-none transition-transform ${
-            isScrolled ? "text-gray-900" : "text-white"
-          }`}
-          aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-8 h-8"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5M3.75 12h16.5m-16.5 6.75h16.5" />
-          </svg>
+        {/* Menú Móvil */}
+        <button onClick={toggleMenu} className="md:hidden text-white text-2xl">
+          ☰
         </button>
       </div>
 
-      {/* Menú móvil desplegable */}
+      {/* Desplegable móvil */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-md rounded-lg mt-4 px-6 py-4 space-y-4">
-          {[
-            { href: "/somos", label: "Quiénes somos" },
-            { href: "/servicios", label: "Servicios" },
-            { href: "/productos", label: "Productos" },
-            { href: "/Impacto", label: "Impacto" },
-            { href: "/contacto", label: "Contáctanos" },
-          ].map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`block text-gray-900 font-semibold ${sharedClasses}`}
-              aria-label={item.label}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <button className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-6 rounded-full shadow-lg hover:scale-105 transition-transform">
-            Recibe Ofertas
-          </button>
+        <div className="md:hidden absolute top-16 left-0 w-full bg-white shadow-md">
+          <nav className="flex flex-col items-center py-4 space-y-4 text-lg">
+            {[{ href: "/somos", label: "Quiénes somos" }, { href: "/productos", label: "Productos" }, { href: "/contacto", label: "Contáctanos" }].map((item) => (
+              <Link key={item.href} href={item.href} className="text-gray-900 hover:text-green-600">
+                {item.label}
+              </Link>
+            ))}
+            <button onClick={openModal} className="py-2 px-6 bg-green-500 text-white rounded-full">Recibe Ofertas</button>
+          </nav>
+        </div>
+      )}
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 className="text-xl font-bold mb-4">Envíanos tus Ideas 🚀</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="Tu correo" className="w-full p-2 border rounded" />
+              <textarea value={message} onChange={(e) => setMessage(e.target.value)} required placeholder="Tu idea" className="w-full p-2 border rounded" rows={3}></textarea>
+              <div className="flex justify-end space-x-2">
+                <button onClick={closeModal} type="button" className="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
+                <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">Enviar</button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </header>
