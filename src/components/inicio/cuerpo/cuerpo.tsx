@@ -1,7 +1,7 @@
-// Agregar la directiva 'use client' al principio del archivo para que se ejecute correctamente en el cliente
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import "animate.css";
 
 const Cuerpo = () => {
@@ -39,16 +39,19 @@ const Cuerpo = () => {
 
       <div className="relative z-10 px-4 sm:px-8 space-y-6">
         {/* Logo */}
-        <img
-          src="/img/sinborde.png"
-          alt="Plastic Market Logo"
-          className="logo mx-auto animate__animated"
-          style={{
-            width: "400px",
-            height: "auto",
-            filter: "drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.7))",
-          }}
-        />
+        <div className="logo mx-auto animate__animated relative" style={{ width: "400px", height: "auto" }}>
+          <Image
+            src="/img/sinborde.png"
+            alt="Plastic Market Logo"
+            layout="responsive"
+            width={400}
+            height={400}
+            style={{
+              filter: "drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.7))",
+            }}
+          />
+        </div>
+
         <h1
           id="hero-heading"
           className="title text-5xl sm:text-6xl md:text-8xl font-extrabold uppercase tracking-wide animate__animated"

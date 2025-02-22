@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -12,14 +13,16 @@ const Footer = () => {
             {/* Logo */}
             <div className="flex items-center gap-6">
               <Link href="/" aria-label="PlasticMarket - Inicio">
-              <div className="w-32 h-32 relative cursor-pointer">
-                {/* Logo Image */}
-                <img
-                  src="/img/image.png" // Reemplaza esta ruta con la ubicación de tu imagen
-                  alt="PlasticMarket Logo"
-                  className="w-full h-full object-cover rounded-full"
-                />
-              </div>
+                <div className="w-32 h-32 relative cursor-pointer">
+                  {/* Logo Image */}
+                  <Image
+                    src="/img/image.png"
+                    alt="PlasticMarket Logo"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full"
+                  />
+                </div>
               </Link>
               <span className="text-3xl font-bold hidden md:inline-block text-white tracking-tight">
                 PlasticMarket<sup>®</sup>
@@ -34,10 +37,10 @@ const Footer = () => {
             {/* Social Media Icons */}
             <div className="flex gap-6">
               {[
-                { href: "#", label: "Instagram", icon: "img/instagram.png" },
-                { href: "#", label: "Facebook", icon: "img/facebook.png" },
-                { href: "#", label: "LinkedIn", icon: "img/xn.png" },
-                { href: "https://www.youtube.com/@plasticmarketspa574", label: "YouTube", icon: "img/ytnsf.png" },
+                { href: "#", label: "Instagram", icon: "/img/instagram.png" },
+                { href: "#", label: "Facebook", icon: "/img/facebook.png" },
+                { href: "#", label: "LinkedIn", icon: "/img/xn.png" },
+                { href: "https://www.youtube.com/@plasticmarketspa574", label: "YouTube", icon: "/img/ytnsf.png" },
               ].map((media, index) => (
                 <a
                   key={index}
@@ -47,30 +50,8 @@ const Footer = () => {
                   className="text-white hover:text-teal-200 transition-colors duration-300 transform hover:scale-110"
                   aria-label={`Visítanos en ${media.label}`}
                 >
-                  <img src={media.icon} alt={media.label} className="w-8 h-8" />
+                  <Image src={media.icon} alt={media.label} width={32} height={32} />
                 </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Links Section */}
-          <div className="space-y-6 md:space-y-4">
-            <h4 className="text-xl font-semibold text-white">Enlaces rápidos</h4>
-            <div className="space-y-3">
-              {[
-                { href: "/trabaja", text: "Trabaja con nosotros" },
-                { href: "/privacidad", text: "Políticas de privacidad" },
-                { href: "/cookies", text: "Políticas de cookies" },
-                { href: "/empresa", text: "Políticas de la empresa" },
-                { href: "/denuncias", text: "Canal de denuncias" },
-              ].map((link, index) => (
-                <Link
-                  key={index}
-                  href={link.href}
-                  className="block hover:text-teal-200 transition-all duration-300"
-                >
-                  {link.text}
-                </Link>
               ))}
             </div>
           </div>

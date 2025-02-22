@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { db } from "@modal/firebase"; // Verifica la ruta
 import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 
@@ -49,7 +50,7 @@ const CreateProduct = () => {
       const querySnapshot = await getDocs(collection(db, "products"));
       const productsList = querySnapshot.docs.map((doc) => ({
         id: doc.id,
-        images: doc.data().images || ["", ""], // Asegúrate de que 'images' sea siempre un array con dos elementos
+        images: doc.data().images || ["", ""],
         ...doc.data(),
       })) as Product[];
       setProducts(productsList);
@@ -62,7 +63,7 @@ const CreateProduct = () => {
   const deleteProduct = async (productId: string) => {
     try {
       await deleteDoc(doc(db, "products", productId));
-      fetchProducts(); // Actualizar la lista después de eliminar el producto
+      fetchProducts();
     } catch (error) {
       console.error("Error al eliminar el producto:", error);
     }
@@ -78,7 +79,7 @@ const CreateProduct = () => {
         images: productToEdit.images,
         category: productToEdit.category,
       });
-      setEditingProductId(productId); // Establecemos el producto en modo de edición
+      setEditingProductId(productId);
     }
   };
 
@@ -88,12 +89,12 @@ const CreateProduct = () => {
     if (editingProductId) {
       try {
         const productRef = doc(db, "products", editingProductId);
-        await updateDoc(productRef, product); // Actualizamos el producto
+        await updateDoc(productRef, product);
         setSuccess(true);
         setTimeout(() => setSuccess(false), 3000);
-        setEditingProductId(null); // Limpiamos el estado de edición
+        setEditingProductId(null);
         setProduct({ title: "", description: "", images: ["", ""], category: "Hogar" });
-        fetchProducts(); // Actualizamos la lista de productos después de la edición
+        fetchProducts();
       } catch (error) {
         console.error("Error al actualizar el producto:", error);
         setError("Error al actualizar el producto. Inténtalo de nuevo.");
@@ -156,25 +157,29 @@ const CreateProduct = () => {
           {editingProductId ? "Actualizar Producto" : "Agregar Producto"}
         </button>
       </form>
+
       {success && <p className="text-green-500 mt-4">Producto {editingProductId ? "actualizado" : "agregado"} con éxito.</p>}
       {error && <p className="text-red-500 mt-4">{error}</p>}
 
-      {/* Dashboard para mostrar productos */}
+      {/* Dashboard de Productos */}
       <div className="mt-10">
         <h3 className="text-xl font-bold mb-4">Dashboard de Productos</h3>
         {products.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {products.map((product) => (
               <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
-                {/* Mostrar las dos imágenes del producto */}
+                {/* Mostrar imágenes con next/image */}
                 {product.images && product.images.length > 0 ? (
-                  product.images.filter(image => image).map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt={`Imagen ${index + 1} de ${product.title}`}
-                      className="w-full h-40 object-cover rounded-md mb-2"
-                    />
+                  product.images.filter((image) => image).map((image, index) => (
+                    <div key={index} className="relative w-full h-40 mb-2">
+                      <Image
+                        src={image}
+                        alt={`Imagen ${index + 1} de ${product.title}`}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-md"
+                      />
+                    </div>
                   ))
                 ) : (
                   <p>No hay imágenes disponibles.</p>

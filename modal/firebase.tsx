@@ -1,23 +1,21 @@
-// firebase.js
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"; // Importar también el servicio de autenticación
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
+import { getAuth, Auth } from "firebase/auth";
+import { getFirestore, Firestore } from "firebase/firestore";
+import { getStorage, FirebaseStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDauDRuyrDBvcYRDEgJRNvLitencmFr_1A",
-  authDomain: "plasticmarket-1cd07.firebaseapp.com",
-  projectId: "plasticmarket-1cd07",
-  storageBucket: "plasticmarket-1cd07.appspot.com",
-  messagingSenderId: "458790848814",
-  appId: "1:458790848814:web:3acfb8a5d3eecf3e2d92bf",
-  measurementId: "G-2X3B8D8BQ1",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Inicializa Firebase solo una vez
-const app = initializeApp(firebaseConfig);
+// Evitar múltiples inicializaciones
+const app: FirebaseApp = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 
-// Exportar servicios para usarlos en el proyecto
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+export const auth: Auth = getAuth(app);
+export const db: Firestore = getFirestore(app);
+export const storage: FirebaseStorage = getStorage(app);

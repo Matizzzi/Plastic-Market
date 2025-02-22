@@ -1,6 +1,7 @@
 "use client"; // Asegúrate de que este componente se ejecute solo en el cliente
 
 import React from "react";
+import Image from "next/image";
 
 const ReciclamosSection = () => {
   const items = [
@@ -35,12 +36,13 @@ const ReciclamosSection = () => {
             onKeyPress={(e) => e.key === "Enter" && console.log(`Seleccionado: ${item.label}`)}
             aria-label={`Ver más información sobre ${item.label}`}
           >
-            <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-green-300 shadow-md hover:scale-110 transition-transform duration-300">
-              <img
+            <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-green-300 shadow-md hover:scale-110 transition-transform duration-300 relative">
+              <Image
                 src={item.img}
                 alt={`Material reciclable: ${item.label}`}
-                className="w-full h-full object-cover"
-                loading="lazy"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-full"
               />
             </div>
             <p className="text-lg font-semibold text-gray-700">{item.label}</p>
