@@ -4,38 +4,34 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-teal-800 via-teal-600 to-teal-500 text-white py-12">
-      <div className="container mx-auto px-4">
+    <footer className="bg-gradient-to-r from-teal-900 via-teal-700 to-teal-500 text-white py-16 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+      <div className="container mx-auto px-6 relative z-10">
         {/* Main Footer Content */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-20">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-12">
           {/* Logo and Social Media Section */}
-          <div className="space-y-8">
-            {/* Logo */}
-            <div className="flex items-center gap-6">
-              <Link href="/" aria-label="PlasticMarket - Inicio">
-                <div className="w-32 h-32 relative cursor-pointer">
-                  {/* Logo Image */}
-                  <Image
-                    src="/img/image.png"
-                    alt="PlasticMarket Logo"
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-full"
-                  />
-                </div>
-              </Link>
-              <span className="text-3xl font-bold hidden md:inline-block text-white tracking-tight">
-                PlasticMarket<sup>®</sup>
-              </span>
-            </div>
-
-            {/* Social Media Text */}
-            <p className="text-sm text-gray-200 mb-4 leading-relaxed">
-              Únete a nuestra conversación en redes sociales. Síguenos para más actualizaciones y contenido exclusivo.
+          <div className="text-center md:text-left">
+            <Link href="/" aria-label="PlasticMarket - Inicio">
+              <div className="w-40 h-40 mx-auto md:mx-0 relative cursor-pointer rounded-full overflow-hidden border-4 border-white shadow-lg">
+                <Image
+                  src="/img/image.png"
+                  alt="PlasticMarket Logo"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            </Link>
+            <h2 className="text-4xl font-bold mt-4 tracking-wide">PlasticMarket<sup>®</sup></h2>
+            <p className="text-gray-300 mt-2 text-lg">
+              Innovación en productos plásticos para cada necesidad.
             </p>
+          </div>
 
-            {/* Social Media Icons */}
-            <div className="flex gap-6">
+          {/* Social Media Section */}
+          <div className="text-center md:text-right">
+            <h3 className="text-2xl font-semibold mb-4">Síguenos en nuestras redes</h3>
+            <div className="flex justify-center md:justify-end gap-6">
               {[
                 { href: "#", label: "Instagram", icon: "/img/instagram.png" },
                 { href: "#", label: "Facebook", icon: "/img/facebook.png" },
@@ -47,10 +43,10 @@ const Footer = () => {
                   href={media.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-teal-200 transition-colors duration-300 transform hover:scale-110"
+                  className="transform transition-all duration-300 hover:scale-125"
                   aria-label={`Visítanos en ${media.label}`}
                 >
-                  <Image src={media.icon} alt={media.label} width={32} height={32} />
+                  <Image src={media.icon} alt={media.label} width={40} height={40} className="drop-shadow-lg" />
                 </a>
               ))}
             </div>

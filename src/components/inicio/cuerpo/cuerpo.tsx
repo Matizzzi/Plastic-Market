@@ -21,97 +21,55 @@ const Cuerpo = () => {
 
   return (
     <section
-      className="relative flex justify-center items-center bg-cover bg-center text-white text-center"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url(/img/nuevoFondo.jpg)",
-        height: "100vh",
-        overflow: "hidden",
-      }}
+      className="relative flex justify-center items-center text-white text-center w-full h-screen overflow-hidden"
       aria-labelledby="hero-heading"
     >
-      {/* Animación de fondo */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-70%] left-[-70%] w-[250%] h-[250%] bg-[radial-gradient(circle,rgba(255,105,180,0.1),transparent_80%)] animate-rotate"></div>
-        <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(138,43,226,0.15),transparent_80%)] animate-rotate-reverse"></div>
-        <div className="absolute top-[-30%] left-[-30%] w-[150%] h-[150%] bg-[radial-gradient(circle,rgba(255,165,0,0.2),transparent_70%)] animate-rotate"></div>
-      </div>
+      {/* Video de fondo */}
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/video/videoOficial.mp4" type="video/mp4" />
+        Tu navegador no soporta videos.
+      </video>
 
-      <div className="relative z-10 px-4 sm:px-8 space-y-6">
+      {/* Contenido */}
+      <div className="relative z-10 px-6 sm:px-12 space-y-8 flex flex-col items-center">
         {/* Logo */}
-        <div className="logo mx-auto animate__animated relative" style={{ width: "400px", height: "auto" }}>
+        <div className="logo animate__animated" style={{ maxWidth: "320px" }}>
           <Image
             src="/img/sinborde.png"
             alt="Plastic Market Logo"
             layout="responsive"
-            width={400}
-            height={400}
-            style={{
-              filter: "drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.7))",
-            }}
+            width={320}
+            height={320}
+            className="drop-shadow-lg"
           />
         </div>
 
         <h1
           id="hero-heading"
-          className="title text-5xl sm:text-6xl md:text-8xl font-extrabold uppercase tracking-wide animate__animated"
-          style={{
-            textShadow: "2px 2px 12px rgba(0, 0, 0, 0.8)",
-          }}
+          className="title text-4xl sm:text-6xl md:text-8xl font-extrabold uppercase tracking-wide animate__animated"
+          style={{ textShadow: "3px 3px 15px rgba(0, 0, 0, 0.9)" }}
         >
           PlasticMarket<sup>®</sup>
         </h1>
         <p
-          className="subtitle text-lg sm:text-2xl md:text-3xl font-light animate__animated"
+          className="subtitle text-lg sm:text-2xl md:text-3xl font-light animate__animated max-w-3xl"
           style={{
-            textShadow: "1px 1px 6px rgba(0, 0, 0, 0.6)",
-            lineHeight: "1.8",
+            textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)",
+            lineHeight: "2",
           }}
         >
-          &ldquo;IDEAS QUE VENDEN MAS&rdquo;
+          &ldquo;IDEAS QUE VENDEN MÁS&rdquo;
         </p>
       </div>
 
-      {/* Estilos en línea */}
-      <style jsx>{`
-        @keyframes rotate {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes rotate-reverse {
-          0% {
-            transform: rotate(360deg);
-          }
-          100% {
-            transform: rotate(0deg);
-          }
-        }
-
-        .animate-rotate {
-          animation: rotate 20s linear infinite;
-        }
-
-        .animate-rotate-reverse {
-          animation: rotate-reverse 30s linear infinite;
-        }
-
-        @media (max-width: 768px) {
-          .title {
-            font-size: 2.5rem !important;
-          }
-          .subtitle {
-            font-size: 1.5rem !important;
-          }
-          .logo {
-            width: 200px !important;
-          }
-        }
-      `}</style>
+      {/* Capa de oscurecimiento */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40"></div>
     </section>
   );
 };
